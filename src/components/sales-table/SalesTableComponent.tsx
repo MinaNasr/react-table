@@ -1,14 +1,8 @@
 
+import { IData } from "../../interfaces/salesTableInterface";
 import "./SalesTableComponent.styles.css";
 
 
-
-export interface IData {
-    name: string;
-    email: string;
-    age: string;
-    food: string;
-}
 
 
 

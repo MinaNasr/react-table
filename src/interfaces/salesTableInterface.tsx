@@ -1,4 +1,3 @@
-import { IData } from "../components/sales-table/SalesTableComponent";
 
 export interface ITableApiResponse {
     apiVersion: string;
@@ -15,4 +14,14 @@ export interface ITableApiResponse {
         id: string;
         total: number;
     }
+}
+
+export interface IData {
+    period: number;
+    stateid: string;
+    stateDescription: string;
+    sectorid: string;
+    sectorName: string;
+    sales: number;
+    "sales-units": string;
 }
