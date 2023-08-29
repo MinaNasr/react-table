@@ -1,51 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./App.css";
-import SalesTableComponent from "./components/sales-table/SalesTableComponent";
+import SalesTableComponent, {
+  IData,
+} from "./components/sales-table/SalesTableComponent";
+import { ITableApiResponse } from "./interfaces/salesTableInterface";
+
 
 function App() {
-  const fetchData = () => {
-    fetch('https://api.eia.gov/v2/seriesid/ELEC.SALES.CO-RES.A?api_key=nIa7SZTCOf4VWCgh5fQUqXKNVdTZWzmzDDBVukfI').then(
-      response => response.json()
-    ).then(res=> console.log(res))
-  }
-
-  useEffect(()=>{
-    fetchData();
-  },[])
-
-  const data = [
-    {
-      name: "James",
-      email: "james@hotmail.com",
-      age: "32",
-      food: "pizza",
-    },
-    {
-      name: "Jennifer",
-      email: "jennifer@hotmail.com",
-      age: "23",
-      food: "sushi",
-    },
-    {
-      name: "Markus",
-      email: "markus@hotmail.com",
-      age: "21",
-      food: "chicken parm",
-    },
-    {
-      name: "Sarah",
-      email: "sarah@hotmail.com",
-      age: "30",
-      food: "burritos",
-    },
-    {
-      name: "Stella",
-      email: "stella@hotmail.com",
-      age: "27",
-      food: "samosa",
-    },
-  ];
-  return <SalesTableComponent data={data}/>;
+  const API_KEY = "nIa7SZTCOf4VWCgh5fQUqXKNVdTZWzmzDDBVukfI";
+  const [tableData, setTableData] = useState<IData[]>([]);
+  useEffect(() => {
+    axios
+      .get<ITableApiResponse>(
+        `https://api.eia.gov/v2/seriesid/ELEC.SALES.CO-RES.A?api_key=${API_KEY}`
+      )
+      .then((res) => setTableData(res.data.response.data))
+  }, []);
+  return <SalesTableComponent data={tableData} />;
 }
 
 export default App;
