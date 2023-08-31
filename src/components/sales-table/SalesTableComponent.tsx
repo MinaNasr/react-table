@@ -2,10 +2,6 @@
 import { IData } from "../../interfaces/salesTableInterface";
 import "./SalesTableComponent.styles.css";
 
-
-
-
-
 const SalesTableComponent = (props: {data: IData[]}) => {
     const keys = props.data.length ? Object.keys(props.data[0]) : [];
     return (
